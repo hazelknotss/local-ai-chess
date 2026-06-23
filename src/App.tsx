@@ -111,15 +111,16 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        const { modelName, ...safelyParsed } = parsed;
         return {
           lmStudioUrl: 'http://localhost:1234/v1',
-          modelName: 'gemma-3-1b',
           connectionMode: 'direct',
           fallbackToRandom: true,
           engineDelayMs: 1200,
           showThoughtProcess: true,
           persistMoveHistory: true,
-          ...parsed,
+          ...safelyParsed,
+          modelName: 'google/gemma-3-1b-2', // Always force the target model to google/gemma-3-1b-2
         };
       } catch (e) {
         console.error('Failed to parse settings:', e);
@@ -127,7 +128,7 @@ export default function App() {
     }
     return {
       lmStudioUrl: 'http://localhost:1234/v1',
-      modelName: 'gemma-3-1b',
+      modelName: 'google/gemma-3-1b-2',
       connectionMode: 'direct',
       fallbackToRandom: true,
       engineDelayMs: 1200,

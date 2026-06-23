@@ -56,10 +56,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           detectedModels: modelsList,
         });
         onLogMessage('system', `LM Studio Live! Detected models: ${modelsList.join(', ') || 'none'}`);
-        if (modelsList.length > 0 && !modelsList.includes(settings.modelName)) {
-          // Auto-select first model if active
-          onUpdateSettings({ ...settings, modelName: modelsList[0] });
-        }
+        // Model Name is locked to google/gemma-3-1b-2, so we do not auto-override it
         sfx.playVictory();
       } else {
         throw new Error(data.error || 'Unknown response structure');
@@ -148,38 +145,15 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           </div>
         </div>
 
-        {/* Model ID Selector */}
+        {/* Model ID Display (Locked to google/gemma-3-1b-2) */}
         <div className="space-y-1.5">
           <label className="text-[10px] font-retro text-slate-400 block">TARGET MODEL</label>
-          {testResult.detectedModels.length > 0 ? (
-            <Select
-              value={settings.modelName}
-              onValueChange={(val) => {
-                sfx.playSelect();
-                onUpdateSettings({ ...settings, modelName: val });
-              }}
-            >
-              <SelectTrigger className="font-mono bg-slate-950 border-2 border-slate-850 text-slate-200 h-9 p-2 focus:ring-0 focus:border-cyan-500 rounded-none text-xs">
-                <SelectValue placeholder="Select active model" />
-              </SelectTrigger>
-              <SelectContent className="bg-slate-950 border-2 border-slate-850 text-slate-205 rounded-none">
-                {testResult.detectedModels.map((model) => (
-                  <SelectItem key={model} value={model} className="focus:bg-cyan-500 focus:text-slate-950 font-mono text-xs">
-                    {model}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          ) : (
-            <Input
-              value={settings.modelName}
-              onChange={(e) => onUpdateSettings({ ...settings, modelName: e.target.value })}
-              className="font-mono bg-slate-950 border-2 border-slate-850 text-slate-200 h-9 p-2 focus-visible:ring-0 focus-visible:border-cyan-500 rounded-none text-xs"
-              placeholder="e.g. gemma-3-2b-it"
-            />
-          )}
+          <div className="font-mono bg-slate-950 border-2 border-slate-800 text-cyan-400 h-9 px-2.5 flex items-center justify-between text-xs select-none">
+            <span>google/gemma-3-1b-2</span>
+            <span className="text-[7.5px] font-retro px-1 py-0.5 bg-slate-850 text-slate-400 border border-slate-700">LOCKED</span>
+          </div>
           <span className="text-[8px] text-slate-400 leading-tight block">
-            Target model loaded in LM Studio. Leave empty to use LM Studio&apos;s current active model.
+            Target model is pre-configured to utilize the optimized Google Gemma 3 1B pipeline natively. No manual input required.
           </span>
         </div>
 
