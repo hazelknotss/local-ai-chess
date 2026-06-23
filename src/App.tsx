@@ -113,7 +113,7 @@ export default function App() {
         const parsed = JSON.parse(saved);
         return {
           lmStudioUrl: 'http://localhost:1234/v1',
-          modelName: 'gemma-2-2b-it',
+          modelName: 'gemma-3-1b',
           connectionMode: 'direct',
           fallbackToRandom: true,
           engineDelayMs: 1200,
@@ -127,7 +127,7 @@ export default function App() {
     }
     return {
       lmStudioUrl: 'http://localhost:1234/v1',
-      modelName: 'gemma-2-2b-it',
+      modelName: 'gemma-3-1b',
       connectionMode: 'direct',
       fallbackToRandom: true,
       engineDelayMs: 1200,

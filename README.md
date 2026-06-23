@@ -42,7 +42,7 @@ cp .env.example .env
 If you want the chess game to employ local intelligent board moves using state-of-the-art Large Language Models running on your processor:
 
 1. **Download LM Studio** from [lmstudio.ai](https://lmstudio.ai/) and launch it.
-2. Search and download a compact instruction-following model such as **`gemma-2-2b-it`** or other tiny/medium quantized GGUFs.
+2. Search and download a compact instruction-following model such as **`gemma-3-1b`** or other tiny/medium quantized GGUFs.
 3. Head to the **Local Server** tab (the double-headed arrow symbol on the left toolbar).
 4. Select your downloaded model from the dropdown list and start the server (default port binds to `1234` rendering your API baseline at `http://localhost:1234/v1`).
 5. In the game screen on your browser, click **COGNITIVE ENGINE SETTINGS** (the retro monitor panel/gear icon), and ensure your connection is set to **BROWSER DIRECT** (which directs the browser to communicate directly with your localhost port without intermediate container proxies).

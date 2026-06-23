@@ -13,11 +13,13 @@ interface GameTerminalProps {
 }
 
 export const GameTerminal: React.FC<GameTerminalProps> = ({ logs, onClearLogs }) => {
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalAreaRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom of logs
+  // Auto-scroll to bottom of logs inside container without scrolling page or sliding smoothly
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (terminalAreaRef.current) {
+      terminalAreaRef.current.scrollTop = terminalAreaRef.current.scrollHeight;
+    }
   }, [logs]);
 
   const getLogColorClass = (type: GameLogEntry['type']) => {
@@ -76,7 +78,10 @@ export const GameTerminal: React.FC<GameTerminalProps> = ({ logs, onClearLogs })
       </div>
 
       {/* Terminal View Area */}
-      <div className="flex-1 p-3 overflow-y-auto space-y-2.5 max-h-[300px] md:max-h-[380px] bg-[#0a0f1d] text-slate-300 scrollbar-thin">
+      <div 
+        ref={terminalAreaRef}
+        className="flex-1 p-3 overflow-y-auto space-y-2.5 max-h-[300px] md:max-h-[380px] bg-[#0a0f1d] text-slate-300 scrollbar-thin"
+      >
         {logs.length === 0 ? (
           <div className="text-slate-500 text-center py-6 font-retro text-[9px]">
             &lt; TERMINAL IDLE - WAITING FOR MOVES &gt;
@@ -110,7 +115,6 @@ export const GameTerminal: React.FC<GameTerminalProps> = ({ logs, onClearLogs })
             </div>
           ))
         )}
-        <div ref={terminalEndRef} />
       </div>
     </div>
   );
