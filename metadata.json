@@ -1,0 +1,6 @@
+{
+  "name": "8-Bit Chess with Gemma AI",
+  "description": "An authentic retro 8-bit styled chess game featuring an interactive board, move validation, and a local Gemma-3 AI opponent running via LM Studio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
